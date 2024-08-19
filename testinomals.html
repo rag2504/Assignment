@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Testimonials Carousel</title>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600&display=swap" rel="stylesheet">
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        /* Testimonials Container */
+        .testimonial-section {
+            width: 90%;
+            max-width: 800px;
+            position: relative;
+            overflow: hidden;
+            background-color: #ffffff;
+            padding: 40px 20px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .testimonial-slider {
+            display: flex;
+            transition: transform 0.6s ease;
+        }
+
+        .testimonial {
+            min-width: 100%;
+            box-sizing: border-box;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .testimonial .profile-img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 0 auto 20px auto;
+            border: 4px solid #f76c6c;
+        }
+
+        .testimonial .name {
+            font-size: 1.2em;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .testimonial .order-number {
+            font-size: 0.9em;
+            color: #777;
+            margin-bottom: 15px;
+        }
+
+        .testimonial .review {
+            font-size: 1em;
+            color: #555;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .testimonial .rating {
+            color: #FFD700;
+            font-size: 1.2em;
+        }
+
+        /* Navigation Buttons */
+        .nav-buttons {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            transform: translateY(-50%);
+            padding: 0 20px;
+            box-sizing: border-box;
+        }
+
+        .nav-buttons .prev,
+        .nav-buttons .next {
+            background-color: rgba(0, 0, 0, 0.2);
+            border: none;
+            padding: 10px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .nav-buttons .prev:hover,
+        .nav-buttons .next:hover {
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .nav-buttons .prev i,
+        .nav-buttons .next i {
+            color: #fff;
+            font-size: 20px;
+        }
+
+        /* Pagination Dots */
+        .dots {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .dots .dot {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            margin: 0 5px;
+            background-color: #ccc;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .dots .dot.active {
+            background-color: #f76c6c;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 600px) {
+            .testimonial-section {
+                padding: 30px 15px;
+            }
+
+            .nav-buttons .prev,
+            .nav-buttons .next {
+                padding: 8px;
+            }
+
+            .testimonial .review {
+                font-size: 0.9em;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="testimonial-section">
+        <div class="testimonial-slider">
+            <!-- Testimonial 1 -->
+            <div class="testimonial">
+                <img src="https://i.pravatar.cc/100?img=1" alt="Rashida" class="profile-img">
+                <p class="name">Rashida</p>
+                <p class="order-number">Order 257371940</p>
+                <p class="review">
+                    This is my absolute favorite service to get help with writing papers because of low prices and excellent writing - huge thanks to all the staff who make it happen. You cannot get English paper writing help here without feeling ABSOLUTELY PLEASED haha. If you are reading this and wondering whether or not to use it – just do it!
+                </p>
+                <div class="rating">⭐⭐⭐⭐⭐</div>
+            </div>
+            <!-- Testimonial 2 -->
+            <div class="testimonial">
+                <img src="https://i.pravatar.cc/100?img=2" alt="Alex" class="profile-img">
+                <p class="name">Alex</p>
+                <p class="order-number">Order 358294820</p>
+                <p class="review">
+                    I had a tight deadline and was really stressed out. Thanks to this service, I got my paper done on time and it was exactly what I needed. Highly recommended!
+                </p>
+                <div class="rating">⭐⭐⭐⭐⭐</div>
+            </div>
+            <!-- Testimonial 3 -->
+            <div class="testimonial">
+                <img src="https://i.pravatar.cc/100?img=3" alt="Maria" class="profile-img">
+                <p class="name">Maria</p>
+                <p class="order-number">Order 482930482</p>
+                <p class="review">
+                    Exceptional service! The writer followed all my instructions and the essay was well-structured and insightful. Will definitely use this service again.
+                </p>
+                <div class="rating">⭐⭐⭐⭐⭐</div>
+            </div>
+            <!-- Testimonial 4 -->
+            <div class="testimonial">
+                <img src="https://i.pravatar.cc/100?img=4" alt="John" class="profile-img">
+                <p class="name">John</p>
+                <p class="order-number">Order 593028493</p>
+                <p class="review">
+                    Great experience overall. The support team was very responsive and the final product exceeded my expectations. Thank you!
+                </p>
+                <div class="rating">⭐⭐⭐⭐⭐</div>
+            </div>
+            <!-- Testimonial 5 -->
+            <div class="testimonial">
+                <img src="https://i.pravatar.cc/100?img=5" alt="Sophie" class="profile-img">
+                <p class="name">Sophie</p>
+                <p class="order-number">Order 672394820</p>
+                <p class="review">
+                    I was skeptical at first, but the quality of work and timely delivery proved that this service is trustworthy and professional. Kudos to the team!
+                </p>
+                <div class="rating">⭐⭐⭐⭐⭐</div>
+            </div>
+        </div>
+        <!-- Navigation Buttons -->
+        <div class="nav-buttons">
+            <button class="prev"><i>&#10094;</i></button>
+            <button class="next"><i>&#10095;</i></button>
+        </div>
+        <!-- Pagination Dots -->
+        <div class="dots">
+            <span class="dot active" data-index="0"></span>
+            <span class="dot" data-index="1"></span>
+            <span class="dot" data-index="2"></span>
+            <span class="dot" data-index="3"></span>
+            <span class="dot" data-index="4"></span>
+        </div>
+    </div>
+
+    <script>
+        const slider = document.querySelector('.testimonial-slider');
+        const testimonials = document.querySelectorAll('.testimonial');
+        const prevBtn = document.querySelector('.prev');
+        const nextBtn = document.querySelector('.next');
+        const dots = document.querySelectorAll('.dot');
+
+        let currentIndex = 0;
+        const testimonialCount = testimonials.length;
+        const slideWidth = testimonials[0].clientWidth;
+        let slideInterval;
+
+        // Initialize Slider
+        function initSlider() {
+            slider.style.transform = `translateX(-${currentIndex * slideWidth}px)`;
+            dots[currentIndex].classList.add('active');
+            slideInterval = setInterval(nextSlide, 5000);
+        }
+
+        // Show Next Slide
+        function nextSlide() {
+            currentIndex = (currentIndex + 1) % testimonialCount;
+            updateSlider();
+        }
+
+        // Show Previous Slide
+        function prevSlide() {
+            currentIndex = (currentIndex - 1 + testimonialCount) % testimonialCount;
+            updateSlider();
+        }
+
+        // Update Slider Position and Dots
+        function updateSlider() {
+            slider.style.transform = `translateX(-${currentIndex * slideWidth}px)`;
+            document.querySelector('.dot.active').classList.remove('active');
+            dots[currentIndex].classList.add('active');
+        }
+
+        // Dot Navigation
+        dots.forEach(dot => {
+            dot.addEventListener('click', () => {
+                currentIndex = parseInt(dot.getAttribute('data-index'));
+                updateSlider();
+                resetInterval();
+            });
+        });
+
+        // Reset Interval
+        function resetInterval() {
+            clearInterval(slideInterval);
+            slideInterval = setInterval(nextSlide, 5000);
+        }
+
+        // Event Listeners for Buttons
+        nextBtn.addEventListener('click', () => {
+            nextSlide();
+            resetInterval();
+        });
+
+        prevBtn.addEventListener('click', () => {
+            prevSlide();
+            resetInterval();
+        });
+
+        // Initialize on Window Load
+        window.addEventListener('load', initSlider);
+
+        // Adjust Slider on Window Resize
+        window.addEventListener('resize', () => {
+            slider.style.transition = 'none';
+            slider.style.transform = `translateX(-${currentIndex * testimonials[0].clientWidth}px)`;
+            setTimeout(() => {
+                slider.style.transition = 'transform 0.6s ease';
+            });
+        });
+    </script>
+
+</body>
+</html>
