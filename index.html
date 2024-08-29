@@ -5,336 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Assign Ur Assignment</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-        }
-        :root {
-            --primary-color: #ff6600;
-            --hover-color: #cc5200; /* Slightly darker color for hover effect */
-            --button-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-        }
+    <link rel="stylesheet" href="styles.css"> <!-- Link to the external CSS file -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
-        /* Popup form styles */
-        .popup {
-            display: none;
-            position: fixed;
-            z-index: 1;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            background-color: rgba(0, 0, 0, 0.5);
-        }
-
-        .popup-content {
-            background-color: #fff;
-            padding: 40px;
-            padding-left: 60px; /* Increased padding to the left */
-            border-radius: 20px;
-            max-width: 600px;
-            width: 100%;
-            box-sizing: border-box;
-            margin: auto;
-            position: absolute;
-            left: 50%;
-            top: 50%;
-            transform: translate(-50%, -50%);
-            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5);
-        }
-
-        .popup-content h2 {
-            margin: 0; /* Remove margin from the top */
-            padding: 0; /* Remove any additional padding */
-            color: var(--primary-color);
-            text-align: center;
-        }
-
-        .popup-content form {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            gap: 10px; /* Reduced gap between form elements */
-        }
-
-        .popup-content form label {
-            flex-basis: 45%;
-            margin-bottom: 5px; /* Reduced space between label and input */
-            text-align: left;
-            color: var(--primary-color);
-            font-size: 18px; /* Increased font size for labels */
-        }
-
-        .popup-content form input,
-        .popup-content form select {
-            flex-basis: 45%;
-            padding: 8px; /* Reduced padding inside input fields */
-            border-radius: 5px;
-            border: 1px solid #ccc;
-            margin-bottom: 10px; /* Reduced space below input fields */
-        }
-
-        .popup-content form button[type="submit"] {
-            background-color: var(--primary-color);
-            color: #fff;
-            border: none;
-            padding: 12px 24px;
-            border-radius: 5px;
-            cursor: pointer;
-            box-shadow: var(--button-shadow); /* Added box shadow */
-            transition: all 0.3s ease; /* Smooth transition for hover effects */
-        }
-
-        .popup-content form button[type="submit"]:hover {
-            background-color: var(--hover-color); /* Change background color on hover */
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4); /* Enhanced shadow on hover */
-            transform: translateY(-2px); /* Slight lift effect */
-        }
-
-        .close {
-            color: #aaa;
-            position: absolute;
-            right: 20px;
-            top: 20px;
-            font-size: 28px;
-            font-weight: bold;
-        }
-
-        .close:hover,
-        .close:focus {
-            color: black;
-            text-decoration: none;
-            cursor: pointer;
-        }
-
-        .top-bar {
-            background-color: purple;
-            color: white;
-            text-align: center;
-            padding: 10px;
-            font-size: 16px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .top-bar .save-button {
-            background-color: #3498db;
-            color: white;
-            border: none;
-            padding: 8px 15px;
-            margin-left: 10px;
-            cursor: pointer;
-            border-radius: 5px;
-            font-size: 16px;
-            transition: background-color 0.3s ease;
-        }
-
-        .top-bar .save-button:hover {
-            background-color: #2980b9;
-        }
-
-        .navbar {
-    background-color: #333;
-    color: white;
-    border-bottom: 1px solid #444;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 10px 20px;
-    width: 100%;
-    box-sizing: border-box;
-    z-index: 1000;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-        .navbar .logo-container {
-            display: flex;
-            align-items: center;
-        }
-
-        .navbar .logo-container img {
-            max-height: 50px;
-            margin-right: 15px;
-        }
-
-        .navbar .logo-container .brand {
-            font-size: 26px;
-            font-weight: bold;
-            color: white;
-            text-transform: uppercase;
-        }
-
-        .navbar .nav-links {
-            display: flex;
-            align-items: center;
-            flex-grow: 1;
-            justify-content: center;
-        }
-
-        .navbar .nav-links a {
-            color: white;
-            text-align: center;
-            padding: 10px 15px;
-            text-decoration: none;
-            font-size: 16px;
-        }
-
-        .navbar .nav-links a:hover {
-            color: #4CAF50;
-        }
-
-        .navbar .nav-links a.active {
-            color: #4CAF50;
-        }
-
-        .navbar .action-buttons {
-            display: flex;
-            align-items: center;
-        }
-
-        .navbar .action-buttons a {
-            margin-left: 15px;
-            color: white;
-            text-decoration: none;
-            font-size: 16px;
-            padding: 10px 20px;
-            border: 1px solid white;
-            border-radius: 5px;
-            transition: all 0.3s ease;
-        }
-
-        .navbar .action-buttons a:hover {
-            background-color: white;
-            color: #333;
-        }
-
-        .navbar .menu-icon {
-            display: none;
-            font-size: 24px;
-            color: white;
-            cursor: pointer;
-        }
-
-        @media screen and (max-width: 768px) {
-            .navbar {
-                flex-direction: column;
-                align-items: flex-start;
-                top: 60px;
-            }
-
-            .navbar .nav-links {
-                flex-direction: column;
-                width: 100%;
-                display: none;
-            }
-
-            .navbar .nav-links a {
-                text-align: left;
-                width: 100%;
-                padding: 10px 20px;
-            }
-
-            .navbar .menu-icon {
-                display: block;
-                margin-left: auto;
-            }
-
-            .navbar .menu-icon.active + .nav-links {
-                display: flex;
-            }
-
-            .navbar .action-buttons {
-                margin-top: 10px;
-            }
-
-            .navbar .action-buttons a {
-                margin-left: 0;
-                margin-top: 10px;
-            }
-        }
-
-        .hero {
-            text-align: center;
-            padding: 100px 20px;
-            background-color: #f9f9f9;
-        }
-
-        .hero h1 {
-            font-size: 48px;
-            margin-bottom: 20px;
-        }
-
-        .hero p {
-            font-size: 18px;
-            margin-bottom: 40px;
-        }
-
-        .hero-buttons {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-        }
-
-        .btn {
-            text-decoration: none;
-            padding: 15px 30px;
-            border-radius: 5px;
-            font-size: 16px;
-        }
-
-        .btn-primary {
-            background-color: #f76c6c;
-            color: #fff;
-        }
-
-        .btn-secondary {
-            background-color: transparent;
-            color: #333;
-            border: 1px solid #333;
-        }
-
-        .btn-primary:hover {
-            background-color: #e65a5a;
-            color: #fff;
-        }
-
-        .btn-secondary:hover {
-            background-color: #333;
-            color: #fff;
-        }
-
-        .business-details {
-            text-align: center;
-            padding: 80px 20px;
-            background-color: #f9f9f9;
-        }
-        .business-details h2 {
-            font-size: 36px;
-            margin-bottom: 20px;
-        }
-
-        .business-details p {
-            font-size: 18px;
-            margin-bottom: 40px;
-        }
-
-    
-    </style>
 </head>
 <body>
 
 <div class="top-bar">
     First order? Save 20% on it (10% instant discount + 10% on next order)
-    <button class="save-button">Save 20</button>
+    <button class="save-button" onclick="window.location.href='save20.html'">Save 20</button>
+
 </div>
 
 <div class="navbar">
     <div class="logo-container">
-        <!-- Replace src attribute with your logo path -->
         <img src="C:\Work\logo.jpg" alt="Logo">
         <div class="brand">Assign Ur Assignment</div>
     </div>
@@ -353,84 +37,123 @@
     </div>
 </div>
 
-
 <section class="hero">
     <h1 style="font-family: Comic Sans MS">Welcome to Assign Ur Assignment</h1>
     <p>Your one-stop solution for all your assignment needs</p>
     <div class="hero-buttons">
-        
-        <button id="openPopup"class="btn btn-primary" style="cursor: pointer">Get Started</button>
+        <button id="openPopup" class="btn btn-primary" style="cursor: pointer">Get Started</button>
         <a href="#" class="btn btn-secondary">Learn More →</a>
     </div>
 </section>
 
-
-
 <div id="popupForm" class="popup">
-        <div class="popup-content">
-            <span class="close">&times;</span>
-            <h2 style="font-size:45px; text-align: center;">Order Form</h2>
-            <br><br>
-            <form action="https://api.web3forms.com/submit" method="POST">
-                <input type="hidden" name="access_key" value="6964f5ae-e5b4-4f53-a119-11e42a9578b2">
-                <label for="name">Name:</label>
-                <input type="text" id="name" name="name" class="form-control" required>
-                <label for="contact">Contact No:</label>
-                <input type="tel" id="contact" name="contact" class="form-control" required>
-                <label for="school">School/College Name:</label>
-                <input type="text" id="school" name="School Name" class="form-control" required>
-                <label for="city">City:</label>
-                <input type="text" id="city" name="city" class="form-control" required>
-                <label for="typeOfWork">Type of Work:</label>
-                <select id="typeOfWork" name="typeOfWork" class="form-control" required>
-                    <option value="">Select Type</option>
-                    <option value="journals">Journals</option>
-                    <option value="essay">Essay</option>
-                    <option value="bookCompletion">Book Completion</option>
-                    <option value="presentation">Presentation</option>
-                    <option value="pdfEditing">PDF Editing</option>
-                    <option value="Other">Other</option>
-                </select>
-                <label for="submissionDate">Submission Date:</label>
-                <input type="date" id="submissionDate" name="submissionDate" class="form-control" required>
-                <label for="pages">Number of Pages:</label>
-                <input type="number" id="pages" name="NoOfPages" class="form-control" required>
-                <button type="submit" class="btn btn-primary">Submit</button>
-            </form>
+    <div class="popup-content">
+        <span class="close">&times;</span>
+        <h2 style="font-size:45px; text-align: center;">Order Form</h2>
+        <br><br>
+        <form action="https://api.web3forms.com/submit" method="POST">
+            <input type="hidden" name="access_key" value="6964f5ae-e5b4-4f53-a119-11e42a9578b2">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" class="form-control" required>
+            <label for="contact">Contact No:</label>
+            <input type="tel" id="contact" name="contact" class="form-control" required>
+            <label for="school">School/College Name:</label>
+            <input type="text" id="school" name="School Name" class="form-control" required>
+            <label for="city">City:</label>
+            <input type="text" id="city" name="city" class="form-control" required>
+            <label for="typeOfWork">Type of Work:</label>
+            <select id="typeOfWork" name="typeOfWork" class="form-control" required>
+                <option value="">Select Type</option>
+                <option value="journals">Journals</option>
+                <option value="essay">Essay</option>
+                <option value="bookCompletion">Book Completion</option>
+                <option value="presentation">Presentation</option>
+                <option value="pdfEditing">PDF Editing</option>
+                <option value="Other">Other</option>
+            </select>
+            <label for="submissionDate">Submission Date:</label>
+            <input type="date" id="submissionDate" name="submissionDate" class="form-control" required>
+            <label for="pages">Number of Pages:</label>
+            <input type="number" id="pages" name="NoOfPages" class="form-control" required>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+</div>
+<section class="how-it-works" id="how-it-works">
+    <div class="container">
+        <h2 class="section-title">How It Works</h2>
+        <div class="steps">
+            <div class="step">
+                <div class="icon">📝</div>
+                <h1>Place Your Order</h1>
+                <p>Select the type of assignment and fill in the details.</p>
+            </div>
+            <div class="step">
+                <div class="icon">📅</div>
+                <h1>Track the Progress</h1>
+                <p>Stay updated on the progress through your dashboard.</p>
+            </div>
+            <div class="step">
+                <div class="icon">✅</div>
+                <h1>Get Your Paper</h1>
+                <p>Receive the completed assignment before your deadline.</p>
+            </div>
         </div>
     </div>
+</section>
 
-<script>
-        document.addEventListener('DOMContentLoaded', function () {
-            var orderBtn = document.getElementById('openPopup');
-            var popupForm = document.getElementById('popupForm');
-            var closeBtn = document.querySelector('.close');
+<!-- Why Us Section -->
+<!-- Why Us Section -->
+<section class="why-us">
+    <div class="container">
+        <h2 class="section-title">Why Choose Us</h2>
+        <div class="reasons">
+            <div class="reason">
+                <i class="fas fa-check-circle"></i>
+                <h3>High Quality</h3>
+                <p>We ensure top-notch quality in all our services, guaranteeing satisfaction and trust.</p>
+            </div>
+            <div class="reason">
+                <i class="fas fa-users"></i>
+                <h3>Expert Team</h3>
+                <p>Our team consists of experienced professionals who are experts in their fields.</p>
+            </div>
+            <div class="reason">
+                <i class="fas fa-clock"></i>
+                <h3>Timely Delivery</h3>
+                <p>We value your time and always deliver our services promptly.</p>
+            </div>
+            <div class="reason">
+                <i class="fas fa-dollar-sign"></i>
+                <h3>Affordable Pricing</h3>
+                <p>We offer competitive pricing without compromising on quality.</p>
+            </div>
+            <!-- New Reason 1 -->
+            <div class="reason">
+                <i class="fas fa-certificate"></i>
+                <h3>Certified Professionals</h3>
+                <p>Our writers are certified experts in various academic fields.</p>
+            </div>
+            <!-- New Reason 2 -->
+            <div class="reason">
+                <i class="fas fa-globe"></i>
+                <h3>Global Reach</h3>
+                <p>We cater to students from around the world with diverse needs.</p>
+            </div>
+        </div>
+    </div>
+</section>
 
-            orderBtn.addEventListener('click', function () {
-                popupForm.style.display = 'flex';
-            });
-
-            closeBtn.addEventListener('click', function () {
-                popupForm.style.display = 'none';
-            });
-
-            window.addEventListener('click', function (event) {
-                if (event.target == popupForm) {
-                    popupForm.style.display = 'none';
-                }
-            });
-        });
-    </script>
+<div class="price-quote-section">
+    <h2>Wonder how much would a unique, custom-written sample cost?</h2>
+    <button class="price-quote-btn" onclick="getPriceQuote()">Get a Free Price Quote</button>
+    <p>Get a free estimate of your paper sample's price</p>
+</div>
 
 
-<script>
-    function toggleMenu() {
-        const navLinks = document.querySelector('.nav-links');
-        const menuIcon = document.querySelector('.menu-icon');
-        menuIcon.classList.toggle('active');
-        navLinks.classList.toggle('show');
-    }
-</script>
 
+
+
+<script src="script.js"></script> <!-- Link to the external JavaScript file -->
 </body>
 </html>
