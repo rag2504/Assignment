@@ -1,3 +1,4 @@
+/* General styles */
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -14,7 +15,7 @@ body {
 .popup {
     display: none;
     position: fixed;
-    z-index: 1;
+    z-index: 1002; /* Ensure it stays above the top bar and navbar */
     left: 0;
     top: 0;
     width: 100%;
@@ -32,7 +33,7 @@ body {
     width: 100%;
     box-sizing: border-box;
     margin: auto;
-    position: absolute;
+    position: fixed;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
@@ -103,9 +104,8 @@ body {
     cursor: pointer;
 }
 
+/* Top bar styles */
 .top-bar {
-    background-color: #00796b;
-    color: #ffffff;
     background-color: #00796b; /* Dark Teal */
     color: white;
     text-align: center;
@@ -114,6 +114,12 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    position: -webkit-sticky; /* For Safari */
+    position: sticky;
+    top: 0;
+    width: 100%;
+    z-index: 1001; /* Ensure it stays above the navbar */
+    margin-bottom: 0; /* Remove margin to avoid gap */
 }
 
 .top-bar .save-button {
@@ -132,9 +138,8 @@ body {
     background-color: #2980b9;
 }
 
+/* Navbar styles */
 .navbar {
-    background-color: #004d40;
-    color: #ffffff;
     background-color: #004d40; /* Darker Teal */
     color: white;
     border-bottom: 1px solid #333;
@@ -146,6 +151,11 @@ body {
     box-sizing: border-box;
     z-index: 1000;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: -webkit-sticky; /* For Safari */
+    position: sticky;
+    top: 30px; /* Adjust to the height of the top bar */
+    margin-top: -3px; /* Slight negative margin to counter gap */
+    height: 70px; /* Fixed height for consistency */
 }
 
 .navbar .logo-container {
@@ -216,46 +226,88 @@ body {
     cursor: pointer;
 }
 
+/* Media query for mobile devices */
 @media screen and (max-width: 768px) {
     .navbar {
-    background-color: #004d40;
-    color: #ffffff;
-        flex-direction: column;
-        align-items: flex-start;
-        top: 60px;
+        flex-direction: column; /* Stack items vertically */
+        align-items: flex-start; /* Align items to the start */
+        top: 54px; /* Align with top bar */
+        height: auto; /* Auto height for better stacking */
     }
 
     .navbar .nav-links {
-        flex-direction: column;
+        flex-direction: column; /* Stack items vertically */
         width: 100%;
-        display: none;
+        display: none; /* Hide the nav links initially */
     }
 
     .navbar .nav-links a {
-        text-align: left;
+        text-align: left; /* Align text to the left */
         width: 100%;
         padding: 10px 20px;
     }
 
     .navbar .menu-icon {
-        display: block;
+        display: block; /* Show the menu icon */
         margin-left: auto;
     }
 
     .navbar .menu-icon.active + .nav-links {
-        display: flex;
+        display: flex; /* Show the nav links when the menu icon is active */
     }
 
     .navbar .action-buttons {
-        margin-top: 10px;
+        margin-top: 10px; /* Add margin to the top */
     }
 
     .navbar .action-buttons a {
-        margin-left: 0;
-        margin-top: 10px;
+        margin-left: 0; /* Reset left margin */
+        margin-top: 10px; /* Add margin to the top */
+    }
+
+    /* Popup content adjustments for mobile */
+    .popup-content {
+        padding: 20px; /* Reduce padding */
+        padding-left: 20px; /* Reduce padding */
+        border-radius: 10px; /* Reduce border radius */
+        max-width: 90%; /* Increase max width */
+        width: 90%; /* Increase width */
+        box-sizing: border-box;
+    }
+
+    .popup-content form label,
+    .popup-content form input,
+    .popup-content form select {
+        flex-basis: 100%; /* Full width for form elements */
+    }
+
+    .popup-content form input,
+    .popup-content form select {
+        margin-bottom: 15px; /* Adjust margin */
     }
 }
 
+@media screen and (max-width: 480px) {
+    .navbar .nav-links a {
+        padding: 8px 10px; /* Adjust padding for smaller screens */
+    }
+
+    .popup-content {
+        padding: 15px; /* Further reduce padding */
+        padding-left: 15px; /* Further reduce padding */
+        max-width: 95%; /* Increase max width */
+        width: 95%; /* Increase width */
+    }
+
+    .popup-content form label {
+        font-size: 16px; /* Adjust font size */
+    }
+
+    .popup-content form input,
+    .popup-content form select {
+        padding: 6px; /* Adjust padding */
+    }
+}
 .hero {
     text-align: center;
     padding: 100px 20px;
@@ -534,11 +586,10 @@ body {
 
 
 /* Why Us Section */
+/* Why Us Section */
 .why-us {
     background: linear-gradient(to bottom, rgba(255, 255, 255, 0.8), rgba(0, 0, 0, 0.1)), linear-gradient(to right, #ff7e5f, #feb47b);
     padding: 50px 20px;
-    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.8), rgba(0, 0, 0, 0.1)), 
-                linear-gradient(to right, #ff7e5f, #feb47b); /* Gradient overlay */
     background-blend-mode: overlay;
     background-size: cover;
     text-align: center;
@@ -568,7 +619,7 @@ body {
     justify-content: space-between;
     align-items: center;
     gap: 30px;
-    flex-wrap: wrap;
+    flex-wrap: wrap; /* Allow wrapping on smaller screens */
 }
 
 .why-us .reason {
@@ -576,7 +627,8 @@ body {
     border-radius: 20px;
     padding: 30px;
     box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
-    flex-basis: calc(25% - 20px);
+    flex: 1;
+    min-width: calc(25% - 20px); /* Adjusted for wrapping */
     margin-bottom: 30px;
     transition: transform 0.4s ease, box-shadow 0.4s ease;
     color: #333;
@@ -589,8 +641,7 @@ body {
 
 .why-us .reason i {
     color: #ff7e5f;
-    font-size: 4rem;
-    color: #ff7e5f; /* Accent color */
+    font-size: 4rem; /* Accent color */
     margin-bottom: 20px;
 }
 
@@ -609,7 +660,6 @@ body {
 
 /* Animation for Why Us Section */
 .why-us {
-    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.8), rgba(0, 0, 0, 0.1)), linear-gradient(to right, #ff7e5f, #feb47b);
     opacity: 0;
     transform: translateY(50px);
     transition: opacity 0.6s ease-out, transform 0.6s ease-out;
@@ -618,6 +668,19 @@ body {
 .why-us.active {
     opacity: 1;
     transform: translateY(0);
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .why-us .reason {
+        flex-basis: calc(50% - 20px); /* Two reasons per row on tablets */
+    }
+}
+
+@media (max-width: 768px) {
+    .why-us .reason {
+        flex-basis: calc(100% - 20px); /* Full width for mobile */
+    }
 }
 
 .price-quote-section {
@@ -978,3 +1041,207 @@ body {
         font-size: 0.9rem;
     }
 }
+
+/* Basic Reset */
+body, h1, h2, h3, p, div, span {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Section Styling */
+#achievements {
+    position: relative;
+    padding: 100px 20px;
+    background-color: #f5f7fa;
+    overflow: hidden;
+    text-align: center;
+}
+
+.content-wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+}
+
+/* Section Title */
+.section-title {
+    font-size: 2.5rem;
+    color: #333;
+    margin-bottom: 50px;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-family: 'Roboto', sans-serif;
+    letter-spacing: 1px;
+}
+
+/* Statistics Section */
+.statistics {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.stat-item {
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    flex: 1;
+    min-width: 280px;
+    transition: transform 0.3s ease, background 0.3s ease;
+}
+
+.stat-item:hover {
+    transform: translateY(-10px);
+    background: linear-gradient(135deg, #6dd5ed, #2193b0);
+    color: #ffffff;
+}
+
+.stat-icon {
+    font-size: 3rem;
+    margin-bottom: 20px;
+    color: #2193b0;
+    transition: color 0.3s ease;
+}
+
+.stat-item:hover .stat-icon {
+    color: #ffffff;
+}
+
+.stat-number {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+    transition: color 0.3s ease;
+}
+
+.stat-label {
+    font-size: 1.2rem;
+    color: #777;
+    transition: color 0.3s ease;
+}
+
+/* Background Shapes */
+.background-shapes {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.shape {
+    position: absolute;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #6dd5ed, #2193b0);
+    opacity: 0.5;
+    animation: float 6s ease-in-out infinite;
+}
+
+.shape-1 {
+    width: 300px;
+    height: 300px;
+    top: -150px;
+    left: -150px;
+    animation-delay: 0s;
+}
+
+.shape-2 {
+    width: 400px;
+    height: 400px;
+    bottom: -200px;
+    right: -200px;
+    animation-delay: 3s;
+}
+
+/* Floating Animation */
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-20px);
+    }
+}
+
+/* Main Title Styling */
+.styled-title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 4rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: #333;
+    position: relative;
+    padding: 10px 20px;
+    margin-bottom: 40px;
+    text-align: center;
+    background: linear-gradient(90deg, #ff8a00, #e52e71);
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
+/* Highlighted "Our" Styling */
+.styled-title-highlight {
+    color: #ff8a00;
+    font-weight: 900;
+    position: relative;
+    z-index: 1;
+}
+
+/* Stylish Border Effect */
+.styled-title::before,
+.styled-title::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 4px solid #e52e71;
+    z-index: -1;
+    transform: scaleX(0);
+    transform-origin: bottom right;
+    transition: transform 0.5s ease;
+}
+
+.styled-title::after {
+    border-color: #ff8a00;
+    transform-origin: top left;
+}
+
+.styled-title:hover::before {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+}
+
+.styled-title:hover::after {
+    transform: scaleX(1);
+    transform-origin: top right;
+}
+
+/* Title Background Effect */
+.styled-title-background {
+    content: "Achievements";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 8rem;
+    color: rgba(0, 0, 0, 0.05);
+    z-index: -2;
+    letter-spacing: 10px;
+    text-transform: uppercase;
+    font-weight: 900;
+}
+
+/* Adding Font */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap');
+
